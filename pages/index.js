@@ -1,4 +1,4 @@
-import { habits } from "@/public/habitsDB";
+import { habits } from "@/Data/HabitsDB";
 import HabitList from "@/components /HabitList";
 
 export default function Home() {
@@ -8,4 +8,3 @@ export default function Home() {
     </div>
   );
 }
-ss;
