@@ -7,6 +7,7 @@ const StyledHabitList = styled.ul`
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
+  padding-left: 0;
 `;
 
 export default function HabitList({ habits }) {
