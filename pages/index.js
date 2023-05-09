@@ -1,7 +1,11 @@
-export default function HomePage() {
+import { habits } from "@/public/habitsDB";
+import HabitList from "@/components /HabitList";
+
+export default function Home() {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <HabitList habits={habits} />
     </div>
   );
 }
+ss;
