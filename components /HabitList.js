@@ -6,6 +6,7 @@ export default function HabitList({ habits }) {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    justify-content: flex-center;
   `;
 
   return (
