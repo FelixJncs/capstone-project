@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function HabitCard({ habit }) {
-  const StyledHabitCard = styled.div`
+  const StyledHabitCard = styled.li`
     background-color: #fff;
     border-radius: 1rem;
     padding: 1rem;

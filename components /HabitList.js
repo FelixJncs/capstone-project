@@ -2,11 +2,12 @@ import styled from "styled-components";
 import HabitCard from "./HabitCard";
 
 export default function HabitList({ habits }) {
-  const StyledHabitList = styled.div`
+  const StyledHabitList = styled.ul`
+    list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    justify-content: flex-center;
+    justify-content: center;
   `;
 
   return (
