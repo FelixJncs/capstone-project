@@ -1,24 +1,11 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledHabitDetailsContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-// const StyledHeader = styled.header`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   height: 3rem;
-//   background-color: #333;
-//   color: #fff;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 1.2rem;
-// `;
 
 const StyledCategoriesContainer = styled.main`
   margin: 0 1rem;
@@ -58,7 +45,7 @@ const StyledHabitReasonsLabel = styled.strong`
 
 const StyledHabitReasons = styled.p`
   margin: 0;
-  border: 1px solid rgba(165, 42, 42, 0.5);
+  border: 1px solid rgba(255, 235, 205, 0.5);
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
   padding: 1rem 2rem 1rem 2rem;
   background-color: beige;
@@ -78,18 +65,41 @@ const StyledHabitFeelingLabel = styled.strong`
 
 const StyledHabitFeeling = styled.p`
   margin: 0;
-  border: 1px solid rgba(165, 42, 42, 0.5);
+  border: 1px solid rgba(255, 235, 205, 0.5);
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
   padding: 1rem 2rem 1rem 2rem;
   background-color: beige;
   border-radius: 1rem;
 `;
 
+const StyledBackLinkContainer = styled.div`
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background-color: transparent;
+`;
+
+const StyledBacklink = styled.a`
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: beige;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+  border: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
 export default function HabitDetailsPage({ habit }) {
   console.log(habit);
   return (
     <>
-      {/* <StyledHeader>App Name</StyledHeader> */}
       <StyledHabitDetailsContainer>
         <StyledHabitNameContainer>
           <HabitName>{habit.name}</HabitName>
@@ -104,7 +114,34 @@ export default function HabitDetailsPage({ habit }) {
             <StyledHabitFeeling>{habit.feeling}</StyledHabitFeeling>
           </StyledHabitFeelingContainer>
         </StyledCategoriesContainer>
-        {/* <p>
+        <StyledBackLinkContainer>
+          <Link href="/">
+            <StyledBacklink>Back</StyledBacklink>
+          </Link>
+        </StyledBackLinkContainer>
+      </StyledHabitDetailsContainer>
+    </>
+  );
+}
+
+// const StyledHeader = styled.header`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   height: 3rem;
+//   background-color: #333;
+//   color: #fff;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 1.2rem;
+// `;
+{
+  {
+    /* <StyledHeader>App Name</StyledHeader> */
+  }
+  /* <p>
           <strong>How to Overcome</strong> {habit.Overcome}
         </p>
         <p>
@@ -116,8 +153,5 @@ export default function HabitDetailsPage({ habit }) {
         <p>
           <strong>Duration:</strong> {habit.duration}
         </p>
-        add form inputs for editing habit details */}
-      </StyledHabitDetailsContainer>
-    </>
-  );
+        add form inputs for editing habit details */
 }
