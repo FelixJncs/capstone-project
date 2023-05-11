@@ -87,6 +87,7 @@ const useHabitsStore = create((set) => ({
     set((state) => ({ habits: [...state.habits, newHabit] })),
 }));
 
+export default useHabitsStore;
 export const getServerSnapshot = () => {
   return useHabitsStore.getState();
 };
