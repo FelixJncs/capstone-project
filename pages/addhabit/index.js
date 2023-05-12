@@ -12,7 +12,6 @@ function AddHabitPage() {
 
   return (
     <div>
-      <h1>Add a new habit</h1>
       <AddHabitForm onSubmit={handleSubmit} />
     </div>
   );
