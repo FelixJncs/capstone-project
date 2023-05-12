@@ -1,7 +1,7 @@
-import HabitList from "@/components /HabitList";
+import HabitList from "@/components/HabitList";
 import styled from "styled-components";
 import Link from "next/link";
-import { StyledTitle } from "@/components /StyledTitle";
+import { StyledTitle } from "@/components/StyledTitle";
 
 const StyledHabitListContainer = styled.div`
   display: flex;

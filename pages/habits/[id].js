@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useStore from "@/store";
-import HabitDetailsPage from "@/components /HabitDetailsPage";
+import HabitDetailsPage from "@/components/HabitDetailsPage";
 
 export default function HabitDetails() {
   const router = useRouter();
