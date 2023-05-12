@@ -83,7 +83,7 @@ const StyledBackLinkContainer = styled.div`
   background-color: transparent;
 `;
 
-const StyledBacklink = styled.a`
+const StyledBacklink = styled(Link)`
   display: inline-block;
   padding: 1rem 2rem;
   background-color: beige;
@@ -115,9 +115,7 @@ export default function HabitDetailsPage({ habit }) {
           </StyledHabitFeelingContainer>
         </StyledCategoriesContainer>
         <StyledBackLinkContainer>
-          <Link href="/">
-            <StyledBacklink>Back</StyledBacklink>
-          </Link>
+          <StyledBacklink href="/">Back</StyledBacklink>
         </StyledBackLinkContainer>
       </StyledHabitDetailsContainer>
     </>

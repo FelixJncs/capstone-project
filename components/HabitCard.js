@@ -12,12 +12,11 @@ const StyledHabitCard = styled.li`
 `;
 
 export default function HabitCard({ habit }) {
-  console.log(habit.id);
   return (
     <StyledHabitCard>
-      <h1 key={habit.id}>
+      <h2 key={habit.id}>
         <Link href={`/habits/${habit.id}`}>{habit.name}</Link>
-      </h1>
+      </h2>
 
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
