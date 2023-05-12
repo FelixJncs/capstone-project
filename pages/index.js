@@ -1,7 +1,7 @@
-import { habits } from "@/Data/HabitsDB";
 import HabitList from "@/components /HabitList";
 import styled from "styled-components";
 import Link from "next/link";
+import { StyledTitle } from "@/components /StyledTitle";
 
 const StyledHabitListContainer = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const StyledHabitListContainer = styled.div`
   padding: 2rem;
 `;
 
-const StyledAddLink = styled.a`
+const StyledAddLink = styled(Link)`
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   background-color: beige;
@@ -27,11 +27,13 @@ const StyledAddLink = styled.a`
 `;
 export default function Home() {
   return (
-    <StyledHabitListContainer>
-      <HabitList habits={habits} />
-      <Link href="/addhabit">
-        <StyledAddLink>Add New Habit</StyledAddLink>
-      </Link>
-    </StyledHabitListContainer>
+    <>
+      <StyledTitle>Unhabit</StyledTitle>
+      <StyledHabitListContainer>
+        <HabitList />
+
+        <StyledAddLink href="/addhabit">Add New Habit</StyledAddLink>
+      </StyledHabitListContainer>
+    </>
   );
 }

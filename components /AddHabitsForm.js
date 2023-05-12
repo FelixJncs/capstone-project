@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import useStore from "../Data/store";
+import useStore from "../store";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
+import { StyledTitle } from "./StyledTitle";
 
-const StyledBacklink = styled.a`
+const StyledBacklink = styled(Link)`
   display: inline-block;
   padding: 1rem 2rem;
   background-color: beige;
@@ -64,13 +65,6 @@ const StyledTextAreaField = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-`;
-
-const StyledTitle = styled.h1`
-  text-align: center;
-  border: 1px solid #ccc;
-  margin: 2rem;
-  background-color: beige;
 `;
 
 function AddHabitForm() {
@@ -150,9 +144,8 @@ function AddHabitForm() {
         </StyledFormRow>
         <StyledAddButton type="submit">Add Habit</StyledAddButton>
       </StyledFormContainer>
-      <Link href="/">
-        <StyledBacklink href="/">Back</StyledBacklink>
-      </Link>
+
+      <StyledBacklink href="/">Back</StyledBacklink>
     </>
   );
 }

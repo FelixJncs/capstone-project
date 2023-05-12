@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import HabitCard from "./HabitCard";
-import useStore from "../Data/store";
+import useStore from "../store";
 
 const StyledHabitList = styled.ul`
   list-style-type: none;

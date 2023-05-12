@@ -88,6 +88,3 @@ const useHabitsStore = create((set) => ({
 }));
 
 export default useHabitsStore;
-export const getServerSnapshot = () => {
-  return useHabitsStore.getState();
-};

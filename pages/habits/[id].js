@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
-import { habits } from "../../Data/HabitsDB";
+import useStore from "@/store";
 import HabitDetailsPage from "@/components /HabitDetailsPage";
 
 export default function HabitDetails() {
   const router = useRouter();
   const { id } = router.query;
+  const habits = useStore((state) => state.habits);
   const habit = habits.find((habit) => habit.id === id);
 
   if (!habit) {
