@@ -42,7 +42,7 @@ export default function HabitCard({ habit }) {
         Edit
       </StyledOnCardLink>{" "}
       <StyledButton type="button" onClick={handleDelete}>
-        Delete
+        Gone
       </StyledButton>
     </StyledHabitCard>
   );
