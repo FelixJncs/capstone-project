@@ -1,7 +1,9 @@
 import { useState } from "react";
-import useStore from "@/Data/store";
+import useStore from "@/store";
+import { useRouter } from "next/router";
 
 export default function EditHabitForm({ habit, onSubmit }) {
+  const router = useRouter();
   const [name, setName] = useState(habit.name);
   const [reason, setReason] = useState(habit.reason);
   const [feeling, setFeeling] = useState(habit.feeling);
@@ -18,7 +20,8 @@ export default function EditHabitForm({ habit, onSubmit }) {
       overcome,
     };
     updateHabit(updatedHabit);
-    onSubmit();
+    onSubmit(updatedHabit);
+    router.push("/");
   };
 
   return (

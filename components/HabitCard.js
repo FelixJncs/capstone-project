@@ -20,6 +20,7 @@ export default function HabitCard({ habit }) {
 
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
+      <Link href={`/edithabit/${habit.id}`}>Edit</Link>
     </StyledHabitCard>
   );
 }

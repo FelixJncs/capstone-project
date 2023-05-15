@@ -1,5 +1,5 @@
-import EditHabitForm from "@/components /EditHabitForm";
-import useStore from "@/Data/store";
+import EditHabitForm from "@/components/EditHabitForm";
+import useStore from "@/store";
 import { useRouter } from "next/router";
 
 export default function EditHabitPage() {
@@ -8,8 +8,8 @@ export default function EditHabitPage() {
   const habit = useStore((State) => State.habits.find((h) => h.id === id));
   const updateHabit = useStore((state) => state.updateHabit);
 
-  const handleSubmit = (updateHabit) => {
-    updateHabit(updateHabit);
+  const handleSubmit = (updatedHabit) => {
+    updateHabit(updatedHabit);
   };
 
   if (!habit) {
