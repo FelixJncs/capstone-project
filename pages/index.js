@@ -12,18 +12,17 @@ const StyledHabitListContainer = styled.div`
 `;
 
 const StyledAddLink = styled(Link)`
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+  display: inline-block;
+  padding: 1rem 2rem;
   background-color: beige;
-  color: black;
-  border-radius: 4px;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+  border: none;
   text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 0 2rem 2rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: rgba(255, 235, 205, 0.5);
-  }
 `;
 export default function Home() {
   return (

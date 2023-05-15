@@ -10,17 +10,30 @@ const StyledHabitCard = styled.li`
     margin: 0;
   }
 `;
-
+const StyledSmallLink = styled(Link)`
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: beige;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+  border: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+`;
 export default function HabitCard({ habit }) {
   return (
     <StyledHabitCard>
       <h2 key={habit.id}>
-        <Link href={`/habits/${habit.id}`}>{habit.name}</Link>
+        <StyledSmallLink href={`/habits/${habit.id}`}>
+          {habit.name}
+        </StyledSmallLink>
       </h2>
 
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
-      <Link href={`/edithabit/${habit.id}`}>Edit</Link>
+      <StyledSmallLink href={`/edithabit/${habit.id}`}>Edit</StyledSmallLink>
     </StyledHabitCard>
   );
 }
