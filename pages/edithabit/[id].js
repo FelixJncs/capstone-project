@@ -5,11 +5,12 @@ import { useRouter } from "next/router";
 export default function EditHabitPage() {
   const router = useRouter();
   const { id } = router.query;
-  const habit = useStore((State) => State.habits.find((h) => h.id === id));
-  const updateHabit = useStore((state) => state.updateHabit);
+  const habit = useStore((state) => state.habits.find((h) => h.id === id));
+  const updatedHabit = useStore((state) => state.updateHabit);
 
-  const handleSubmit = (updatedHabit) => {
-    updateHabit(updatedHabit);
+  const handleSubmit = (updatedHabitData) => {
+    updatedHabit(updatedHabitData);
+    router.push("/");
   };
 
   if (!habit) {

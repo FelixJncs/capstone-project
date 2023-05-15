@@ -54,27 +54,22 @@ const StyledTextAreaField = styled.textarea`
 `;
 
 export default function EditHabitForm({ habit, onSubmit }) {
-  const router = useRouter();
   const [name, setName] = useState(habit.name);
   const [reason, setReason] = useState(habit.reason);
   const [feeling, setFeeling] = useState(habit.feeling);
   const [overcome, setOvercome] = useState(habit.overcome);
-  const updateHabit = useStore((state) => state.updateHabit);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedHabit = {
+    const updatedHabitData = {
       ...habit,
       name,
       reason,
       feeling,
       overcome,
     };
-    updateHabit(updatedHabit);
-    onSubmit(updatedHabit);
-    router.push("/");
+    onSubmit(updatedHabitData);
   };
-
   return (
     <>
       <StyledTitle>Edit Habit</StyledTitle>
