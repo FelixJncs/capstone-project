@@ -18,7 +18,6 @@ export default function EditHabitPage() {
 
   return (
     <div>
-      <h1>Edit habit</h1>
       <EditHabitForm habit={habit} onSubmit={handleSubmit} />
     </div>
   );
