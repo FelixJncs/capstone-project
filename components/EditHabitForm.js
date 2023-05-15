@@ -102,9 +102,7 @@ export default function EditHabitForm({ habit, onSubmit }) {
             onChange={(e) => setOvercome(e.target.value)}
           />
         </StyledFormRow>
-        <StyledButton StyledEditButton type="submit">
-          Save
-        </StyledButton>
+        <StyledButton type="submit">Save</StyledButton>
       </StyledFormContainer>
       <StyledLink href="/">Back</StyledLink>
     </>
