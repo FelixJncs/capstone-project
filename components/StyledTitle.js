@@ -5,4 +5,5 @@ export const StyledTitle = styled.h1`
   border: 1px solid #ccc;
   margin: 2rem;
   background-color: beige;
+  border-radius: 2rem;
 `;

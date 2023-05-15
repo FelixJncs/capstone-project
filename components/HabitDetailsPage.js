@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { StyledLink } from "./StyledLink";
 
 const StyledHabitDetailsContainer = styled.section`
   display: flex;
@@ -83,19 +84,6 @@ const StyledBackLinkContainer = styled.div`
   background-color: transparent;
 `;
 
-const StyledBacklink = styled(Link)`
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: beige;
-  border-radius: 1rem;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-  border: none;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 export default function HabitDetailsPage({ habit }) {
   console.log(habit);
   return (
@@ -115,7 +103,7 @@ export default function HabitDetailsPage({ habit }) {
           </StyledHabitFeelingContainer>
         </StyledCategoriesContainer>
         <StyledBackLinkContainer>
-          <StyledBacklink href="/">Back</StyledBacklink>
+          <StyledLink href="/">Back</StyledLink>
         </StyledBackLinkContainer>
       </StyledHabitDetailsContainer>
     </>

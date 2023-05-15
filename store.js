@@ -85,6 +85,12 @@ const useHabitsStore = create((set) => ({
   ],
   addHabit: (newHabit) =>
     set((state) => ({ habits: [...state.habits, newHabit] })),
+  updateHabit: (updatedHabit) =>
+    set((state) => ({
+      habits: state.habits.map((habit) =>
+        habit.id === updatedHabit.id ? updatedHabit : habit
+      ),
+    })),
 }));
 
 export default useHabitsStore;

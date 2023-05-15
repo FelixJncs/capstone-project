@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import useStore from "../store";
+import useStore from "@/store";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import styled from "styled-components";
 import { StyledTitle } from "./StyledTitle";
 import { StyledLink } from "./StyledLink";
 
-const StyledAddButton = styled.button`
+const StyledEditButton = styled.button`
   display: inline-block;
   padding: 1rem 2rem;
   background-color: beige;
@@ -55,40 +53,26 @@ const StyledTextAreaField = styled.textarea`
   font-size: 16px;
 `;
 
-function AddHabitForm() {
-  const addHabit = useStore((state) => state.addHabit);
-  const [habit, setHabit] = useState({
-    id: uuidv4(),
-    name: "",
-    reason: "",
-    feeling: "",
-    overcome: "",
-  });
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    setHabit((prevHabit) => ({
-      ...prevHabit,
-      [e.target.name]: e.target.value,
-    }));
-  };
+export default function EditHabitForm({ habit, onSubmit }) {
+  const [name, setName] = useState(habit.name);
+  const [reason, setReason] = useState(habit.reason);
+  const [feeling, setFeeling] = useState(habit.feeling);
+  const [overcome, setOvercome] = useState(habit.overcome);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addHabit(habit);
-    setHabit({
-      id: uuidv4(),
-      name: "",
-      reason: "",
-      feeling: "",
-      overcome: "",
-    });
-    router.push("/");
+    const updatedHabitData = {
+      ...habit,
+      name,
+      reason,
+      feeling,
+      overcome,
+    };
+    onSubmit(updatedHabitData);
   };
-
   return (
     <>
-      <StyledTitle>New habit</StyledTitle>
+      <StyledTitle>Edit Habit</StyledTitle>
       <StyledFormContainer onSubmit={handleSubmit}>
         <StyledFormRow>
           <label htmlFor="name">Name</label>
@@ -96,8 +80,8 @@ function AddHabitForm() {
             type="text"
             id="name"
             name="name"
-            value={habit.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </StyledFormRow>
         <StyledFormRow>
@@ -106,8 +90,8 @@ function AddHabitForm() {
             type="text"
             id="reason"
             name="reason"
-            value={habit.reason}
-            onChange={handleChange}
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
           />
         </StyledFormRow>
         <StyledFormRow>
@@ -116,8 +100,8 @@ function AddHabitForm() {
             type="text"
             id="feeling"
             name="feeling"
-            value={habit.feeling}
-            onChange={handleChange}
+            value={feeling}
+            onChange={(e) => setFeeling(e.target.value)}
           />
         </StyledFormRow>
         <StyledFormRow>
@@ -126,16 +110,15 @@ function AddHabitForm() {
             type="text"
             id="overcome"
             name="overcome"
-            value={habit.overcome}
-            onChange={handleChange}
+            value={overcome}
+            onChange={(e) => setOvercome(e.target.value)}
           />
         </StyledFormRow>
-        <StyledAddButton type="submit">Add Habit</StyledAddButton>
+        <StyledEditButton StyledEditButton type="submit">
+          Save
+        </StyledEditButton>
       </StyledFormContainer>
-
       <StyledLink href="/">Back</StyledLink>
     </>
   );
 }
-
-export default AddHabitForm;
