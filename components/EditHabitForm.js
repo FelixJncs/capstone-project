@@ -4,19 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { StyledTitle } from "./StyledTitle";
 import { StyledLink } from "./StyledLink";
-
-const StyledEditButton = styled.button`
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: beige;
-  border-radius: 1rem;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-  border: none;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-`;
+import { StyledButton } from "./StyledButton";
 
 const StyledFormContainer = styled.form`
   display: flex;
@@ -114,9 +102,9 @@ export default function EditHabitForm({ habit, onSubmit }) {
             onChange={(e) => setOvercome(e.target.value)}
           />
         </StyledFormRow>
-        <StyledEditButton StyledEditButton type="submit">
+        <StyledButton StyledEditButton type="submit">
           Save
-        </StyledEditButton>
+        </StyledButton>
       </StyledFormContainer>
       <StyledLink href="/">Back</StyledLink>
     </>

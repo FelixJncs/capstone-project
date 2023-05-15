@@ -91,6 +91,10 @@ const useHabitsStore = create((set) => ({
         habit.id === updatedHabit.id ? updatedHabit : habit
       ),
     })),
+  deleteHabit: (habitId) =>
+    set((state) => ({
+      habits: state.habits.filter((habit) => habit.id !== habitId),
+    })),
 }));
 
 export default useHabitsStore;

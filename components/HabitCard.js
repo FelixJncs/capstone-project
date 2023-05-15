@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
+import useHabitsStore from "@/store";
+import { StyledButton } from "./StyledButton";
 
 const StyledHabitCard = styled.li`
   background-color: beige;
@@ -23,6 +25,10 @@ const StyledOnCardLink = styled(Link)`
   cursor: pointer;
 `;
 export default function HabitCard({ habit }) {
+  const onDelete = useHabitsStore((state) => state.deleteHabit);
+  const handleDelete = () => {
+    onDelete(habit.id);
+  };
   return (
     <StyledHabitCard>
       <h2 key={habit.id}>
@@ -30,10 +36,14 @@ export default function HabitCard({ habit }) {
           {habit.name}
         </StyledOnCardLink>
       </h2>
-
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
-      <StyledOnCardLink href={`/edithabit/${habit.id}`}>Edit</StyledOnCardLink>
+      <StyledOnCardLink href={`/edithabit/${habit.id}`}>
+        Edit
+      </StyledOnCardLink>{" "}
+      <StyledButton type="button" onClick={handleDelete}>
+        Delete
+      </StyledButton>
     </StyledHabitCard>
   );
 }

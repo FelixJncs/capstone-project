@@ -2,23 +2,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useStore from "../store";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import styled from "styled-components";
 import { StyledTitle } from "./StyledTitle";
 import { StyledLink } from "./StyledLink";
-
-const StyledAddButton = styled.button`
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: beige;
-  border-radius: 1rem;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-  border: none;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-`;
+import { StyledButton } from "./StyledButton";
 
 const StyledFormContainer = styled.form`
   display: flex;
@@ -130,7 +117,7 @@ function AddHabitForm() {
             onChange={handleChange}
           />
         </StyledFormRow>
-        <StyledAddButton type="submit">Add Habit</StyledAddButton>
+        <StyledButton type="submit">Add Habit</StyledButton>
       </StyledFormContainer>
 
       <StyledLink href="/">Back</StyledLink>
