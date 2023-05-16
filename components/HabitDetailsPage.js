@@ -85,7 +85,6 @@ const StyledBackLinkContainer = styled.div`
 `;
 
 export default function HabitDetailsPage({ habit }) {
-  console.log(habit);
   return (
     <>
       <StyledHabitDetailsContainer>
