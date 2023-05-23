@@ -55,6 +55,7 @@ export default function EditHabitForm({ habit, onSubmit }) {
       reason,
       feeling,
       overcome,
+      progress,
     };
     onSubmit(updatedHabitData);
   };

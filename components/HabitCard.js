@@ -3,7 +3,6 @@ import Link from "next/link";
 import useHabitsStore from "@/store";
 import { StyledButton } from "./StyledButton";
 import HabitProgressBar from "./HabitProgressBar";
-import { useState } from "react";
 
 const StyledHabitCard = styled.li`
   background-color: beige;
