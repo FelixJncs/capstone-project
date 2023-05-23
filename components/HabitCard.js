@@ -27,23 +27,13 @@ const StyledOnCardLink = styled(Link)`
   cursor: pointer;
 `;
 export default function HabitCard({ habit }) {
-  const [progress, setProgress] = useState(habit.progress); // Initialize progress with the stored value
   const updateHabit = useHabitsStore((state) => state.updateHabit);
-
-  const handleIncrement = () => {
-    if (progress < 30) {
-      const updatedProgress = progress + 1;
-      setProgress(updatedProgress);
-      updateHabit({ ...habit, progress: updatedProgress }); // Update the progress in the store
-    } else {
-      setProgress(0);
-      updateHabit({ ...habit, progress: 0 });
-    }
-  };
   const onDelete = useHabitsStore((state) => state.deleteHabit);
+
   const handleDelete = () => {
     onDelete(habit.id);
   };
+
   return (
     <StyledHabitCard>
       <h2 key={habit.id}>
@@ -53,7 +43,7 @@ export default function HabitCard({ habit }) {
       </h2>
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
-      <HabitProgressBar progress={progress} onIncrement={handleIncrement} />
+      <HabitProgressBar habit={habit} updateHabit={updateHabit} />
       <StyledOnCardLink href={`/edithabit/${habit.id}`}>
         Edit
       </StyledOnCardLink>{" "}
