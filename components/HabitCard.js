@@ -3,7 +3,6 @@ import Link from "next/link";
 import useHabitsStore from "@/store";
 import { StyledButton } from "./StyledButton";
 import HabitProgressBar from "./HabitProgressBar";
-import { useState } from "react";
 
 const StyledHabitCard = styled.li`
   background-color: beige;
@@ -27,20 +26,13 @@ const StyledOnCardLink = styled(Link)`
   cursor: pointer;
 `;
 export default function HabitCard({ habit }) {
-  const [progress, setProgress] = useState(0);
-
-  const handleIncrement = () => {
-    if (progress < 30) {
-      setProgress(progress + 1);
-    } else {
-      setProgress(0);
-    }
-  };
-
+  const updateHabit = useHabitsStore((state) => state.updateHabit);
   const onDelete = useHabitsStore((state) => state.deleteHabit);
+
   const handleDelete = () => {
     onDelete(habit.id);
   };
+
   return (
     <StyledHabitCard>
       <h2 key={habit.id}>
@@ -50,7 +42,7 @@ export default function HabitCard({ habit }) {
       </h2>
       <p>Reason: {habit.reason}</p>
       <p>Feeling: {habit.feeling}</p>
-      <HabitProgressBar progress={progress} onIncrement={handleIncrement} />
+      <HabitProgressBar habit={habit} updateHabit={updateHabit} />
       <StyledOnCardLink href={`/edithabit/${habit.id}`}>
         Edit
       </StyledOnCardLink>{" "}

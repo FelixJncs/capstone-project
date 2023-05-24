@@ -108,35 +108,3 @@ export default function HabitDetailsPage({ habit }) {
     </>
   );
 }
-
-// const StyledHeader = styled.header`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   height: 3rem;
-//   background-color: #333;
-//   color: #fff;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 1.2rem;
-// `;
-{
-  {
-    /* <StyledHeader>App Name</StyledHeader> */
-  }
-  /* <p>
-          <strong>How to Overcome</strong> {habit.Overcome}
-        </p>
-        <p>
-          <strong>Start Date:</strong> {habit.startDate}
-        </p>
-        <p>
-          <strong>Frequency:</strong> {habit.frequency}
-        </p>
-        <p>
-          <strong>Duration:</strong> {habit.duration}
-        </p>
-        add form inputs for editing habit details */
-}

@@ -50,6 +50,7 @@ function AddHabitForm() {
     reason: "",
     feeling: "",
     overcome: "",
+    progress: 0,
   });
   const router = useRouter();
 
@@ -69,6 +70,7 @@ function AddHabitForm() {
       reason: "",
       feeling: "",
       overcome: "",
+      progress: 0,
     });
     router.push("/");
   };

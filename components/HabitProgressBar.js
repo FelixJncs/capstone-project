@@ -39,14 +39,23 @@ const IncrementButton = styled.button`
   cursor: pointer;
 `;
 
-const HabitProgressBar = ({ progress, onIncrement }) => {
+const HabitProgressBar = ({ habit, updateHabit }) => {
+  const handleIncrement = () => {
+    if (habit.progress < 30) {
+      const updatedProgress = habit.progress + 1;
+      updateHabit({ ...habit, progress: updatedProgress });
+    } else {
+      updateHabit({ ...habit, progress: 0 });
+    }
+  };
+
   return (
     <StyledProgressBar>
-      <FilledProgressBar progress={progress} />
+      <FilledProgressBar progress={habit.progress} />
       <ProgressLabel>
-        {progress}/{30} days
+        {habit.progress}/{30} days
       </ProgressLabel>
-      <IncrementButton onClick={onIncrement}>+</IncrementButton>
+      <IncrementButton onClick={handleIncrement}>+</IncrementButton>
     </StyledProgressBar>
   );
 };
