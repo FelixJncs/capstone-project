@@ -49,47 +49,42 @@ const useHabitsStore = createLocalStorageStore(
         const currentDate = new Date();
         const updatedHabits = state.habits.map((habit) => {
           if (habit.id === habitId) {
-            const updatedProgress = habit.progress + 1;
-            const updatedStreakCount =
-              updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
+            // Check if the habit was updated today
             const lastUpdatedDate = new Date(habit.lastUpdated);
-            const isConsecutiveDay =
+            const isSameDay =
               currentDate.toDateString() === lastUpdatedDate.toDateString();
 
-            let updatedCurrentStreak = habit.currentStreak;
-            if (isConsecutiveDay) {
-              updatedCurrentStreak =
-                updatedProgress > 0 ? updatedCurrentStreak + 1 : 0;
+            if (isSameDay) {
+              // The habit was already updated today, no need to increment progress again
+              return habit;
             } else {
-              updatedCurrentStreak = updatedProgress > 0 ? 1 : 0;
+              const updatedProgress = habit.progress + 1;
+              const updatedStreakCount =
+                updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
+              let updatedCurrentStreak = habit.currentStreak;
+
+              if (updatedProgress > 0) {
+                // If progress is positive, update the current streak
+                updatedCurrentStreak = habit.currentStreak + 1;
+              } else {
+                // If progress is zero, reset the current streak
+                updatedCurrentStreak = 0;
+              }
+
+              const updatedLongestStreak = Math.max(
+                habit.longestStreak,
+                updatedCurrentStreak
+              );
+
+              return {
+                ...habit,
+                progress: updatedProgress,
+                streakCount: updatedStreakCount,
+                longestStreak: updatedLongestStreak,
+                currentStreak: updatedCurrentStreak,
+                lastUpdated: currentDate.toISOString(),
+              };
             }
-
-            const updatedLongestStreak = Math.max(
-              habit.longestStreak,
-              updatedCurrentStreak
-            );
-
-            return {
-              ...habit,
-              progress: updatedProgress,
-              streakCount: updatedStreakCount,
-              longestStreak: updatedLongestStreak,
-              currentStreak: updatedCurrentStreak,
-              lastUpdated: currentDate.toISOString(),
-            };
-          }
-          return habit;
-        });
-        return { habits: updatedHabits };
-      }),
-    resetProgress: (habitId) =>
-      set((state) => {
-        const updatedHabits = state.habits.map((habit) => {
-          if (habit.id === habitId) {
-            return {
-              ...habit,
-              progress: 0,
-            };
           }
           return habit;
         });
