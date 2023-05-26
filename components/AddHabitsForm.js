@@ -51,6 +51,10 @@ function AddHabitForm() {
     feeling: "",
     overcome: "",
     progress: 0,
+    streakCount: 0,
+    longestStreak: 0,
+    currentStreak: 0,
+    lastUpdated: null,
   });
   const router = useRouter();
 
@@ -71,6 +75,10 @@ function AddHabitForm() {
       feeling: "",
       overcome: "",
       progress: 0,
+      streakCount: 0,
+      longestStreak: 0,
+      currentStreak: 0,
+      lastUpdated: null,
     });
     router.push("/");
   };
