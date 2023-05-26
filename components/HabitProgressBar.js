@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useHabitsStore from "@/store";
 
 const StyledProgressBar = styled.div`
   width: 100%;
@@ -39,13 +40,15 @@ const IncrementButton = styled.button`
   cursor: pointer;
 `;
 
-const HabitProgressBar = ({ habit, updateHabit }) => {
+const HabitProgressBar = ({ habit }) => {
+  const incrementProgress = useHabitsStore((state) => state.incrementProgress);
+  const resetProgress = useHabitsStore((state) => state.resetProgress);
+
   const handleIncrement = () => {
     if (habit.progress < 30) {
-      const updatedProgress = habit.progress + 1;
-      updateHabit({ ...habit, progress: updatedProgress });
+      incrementProgress(habit.id);
     } else {
-      updateHabit({ ...habit, progress: 0 });
+      resetProgress(habit.id);
     }
   };
 
