@@ -51,6 +51,10 @@ function AddHabitForm() {
     feeling: "",
     overcome: "",
     progress: 0,
+    streakCount: 0,
+    longestStreak: 0,
+    currentStreak: 0,
+    lastUpdated: null,
   });
   const router = useRouter();
 
@@ -64,14 +68,6 @@ function AddHabitForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addHabit(habit);
-    setHabit({
-      id: uuidv4(),
-      name: "",
-      reason: "",
-      feeling: "",
-      overcome: "",
-      progress: 0,
-    });
     router.push("/");
   };
 

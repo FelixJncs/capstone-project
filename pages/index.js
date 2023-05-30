@@ -11,7 +11,7 @@ const StyledHabitListContainer = styled.div`
   padding: 2rem;
 `;
 
-const StyledAddLink = styled(Link)`
+const StyledHomepageLink = styled(Link)`
   display: inline-block;
   padding: 1rem 2rem;
   background-color: beige;
@@ -31,7 +31,8 @@ export default function Home() {
       <StyledHabitListContainer>
         <HabitList />
 
-        <StyledAddLink href="/addhabit">Add New Habit</StyledAddLink>
+        <StyledHomepageLink href="/addhabit">Add New Habit</StyledHomepageLink>
+        <StyledHomepageLink href="/habitstats">Stats </StyledHomepageLink>
       </StyledHabitListContainer>
     </>
   );

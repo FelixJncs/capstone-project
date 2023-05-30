@@ -13,6 +13,10 @@ const useHabitsStore = createLocalStorageStore(
         overcome:
           "Break tasks into smaller pieces, set deadlines, and use a planner or task list to stay on track.",
         progress: 0,
+        streakCount: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+        lastUpdated: null,
       },
       {
         id: "2",
@@ -22,78 +26,10 @@ const useHabitsStore = createLocalStorageStore(
         overcome:
           "Use stress-reducing techniques such as exercise, meditation, or deep breathing. Wear gloves or paint your nails to reduce temptation.",
         progress: 0,
-      },
-      {
-        id: "3",
-        name: "Smoking",
-        reason: "An addiction to nicotine",
-        feeling: "Anxious or irritable without nicotine",
-        overcome:
-          "Talk to a healthcare professional about quitting strategies, such as nicotine replacement therapy or medication. Seek support from friends, family, or a support group.",
-        progress: 0,
-      },
-      {
-        id: "4",
-        name: "Poor diet",
-        reason: "Lack of time or resources, or unhealthy eating habits",
-        feeling: "Lethargic or unhealthy",
-        overcome:
-          "Plan meals and snacks in advance, make healthier food choices, and seek support from a registered dietitian or nutritionist.",
-        progress: 0,
-      },
-      {
-        id: "5",
-        name: "Excessive social media use",
-        reason: "A desire for social connection, boredom, or addiction",
-        feeling: "Anxious or disconnected from real life",
-        overcome:
-          "Limit time spent on social media, use apps or tools to track usage, and find other activities to do instead.",
-        progress: 0,
-      },
-      {
-        id: "6",
-        name: "Overspending",
-        reason: "Impulse buying or trying to keep up with others",
-        feeling: "Anxious or guilty about finances",
-        overcome:
-          "Create a budget, avoid impulse purchases, and seek support from a financial planner or counselor.",
-        progress: 0,
-      },
-      {
-        id: "7",
-        name: "Skipping breakfast",
-        reason: "Lack of time or appetite",
-        feeling: "Hungry or low energy",
-        overcome:
-          "Plan breakfast in advance, make healthy choices, and find foods that are easy to prepare and eat on the go.",
-        progress: 0,
-      },
-      {
-        id: "8",
-        name: "Procrastinating sleep",
-        reason: "Difficulty falling asleep or fear of missing out",
-        feeling: "Tired or irritable",
-        overcome:
-          "Establish a regular sleep routine, avoid caffeine and electronic devices before bed, and create a relaxing sleep environment.",
-        progress: 0,
-      },
-      {
-        id: "9",
-        name: "Nail picking or skin picking",
-        reason: "A nervous or anxious habit",
-        feeling: "Embarrassed or ashamed",
-        overcome:
-          "Use stress-reducing techniques such as exercise, meditation, or deep breathing. Wear gloves or cover the affected areas to reduce temptation.",
-        progress: 0,
-      },
-      {
-        id: "10",
-        name: "Interrupting others",
-        reason: "Impatience or desire to be heard",
-        feeling: "Annoyed or frustrated when not being heard",
-        overcome:
-          "Practice active listening, allow others to finish speaking before responding, and seek feedback from others on communication skills.",
-        progress: 0,
+        streakCount: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+        lastUpdated: null,
       },
     ],
     addHabit: (newHabit) =>
@@ -108,6 +44,52 @@ const useHabitsStore = createLocalStorageStore(
       set((state) => ({
         habits: state.habits.filter((habit) => habit.id !== habitId),
       })),
+    incrementProgress: (habitId) =>
+      set((state) => {
+        const currentDate = new Date();
+        const updatedHabits = state.habits.map((habit) => {
+          if (habit.id === habitId) {
+            // Check if the habit was updated today
+            const lastUpdatedDate = new Date(habit.lastUpdated);
+            const isSameDay =
+              currentDate.toDateString() === lastUpdatedDate.toDateString();
+
+            if (isSameDay) {
+              // The habit was already updated today, no need to increment progress again
+              return habit;
+            } else {
+              const updatedProgress = habit.progress + 1;
+              const updatedStreakCount =
+                updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
+              let updatedCurrentStreak = habit.currentStreak;
+
+              if (updatedProgress > 0) {
+                // If progress is positive, update the current streak
+                updatedCurrentStreak = habit.currentStreak + 1;
+              } else {
+                // If progress is zero, reset the current streak
+                updatedCurrentStreak = 0;
+              }
+
+              const updatedLongestStreak = Math.max(
+                habit.longestStreak,
+                updatedCurrentStreak
+              );
+
+              return {
+                ...habit,
+                progress: updatedProgress,
+                streakCount: updatedStreakCount,
+                longestStreak: updatedLongestStreak,
+                currentStreak: updatedCurrentStreak,
+                lastUpdated: currentDate.toISOString(),
+              };
+            }
+          }
+          return habit;
+        });
+        return { habits: updatedHabits };
+      }),
   }),
 
   "habits-store" // unique name
