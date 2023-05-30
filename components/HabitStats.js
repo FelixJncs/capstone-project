@@ -45,6 +45,11 @@ const HabitStats = () => {
     <>
       <StyledTitle>Unhabit</StyledTitle>
       <h2>Habit Stats</h2>
+      <p>
+        Keep going! The Score for each Habit increases by 100 points with every
+        day you manage to stay strong. Every time your longest Streak increases,
+        you get additional 100 points.
+      </p>
       <StyledOverallScore>
         <p>Overall Score: {overallScore}</p>
       </StyledOverallScore>
