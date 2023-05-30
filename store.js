@@ -32,6 +32,7 @@ const useHabitsStore = createLocalStorageStore(
         lastUpdated: null,
       },
     ],
+    overallScore: 0,
     addHabit: (newHabit) =>
       set((state) => ({ habits: [...state.habits, newHabit] })),
     updateHabit: (updatedHabit) =>
@@ -47,6 +48,7 @@ const useHabitsStore = createLocalStorageStore(
     incrementProgress: (habitId) =>
       set((state) => {
         const currentDate = new Date();
+        let overallScore = 0;
         const updatedHabits = state.habits.map((habit) => {
           if (habit.id === habitId) {
             // Check if the habit was updated today
@@ -75,6 +77,13 @@ const useHabitsStore = createLocalStorageStore(
                 habit.longestStreak,
                 updatedCurrentStreak
               );
+              let score = calculateHabitScore(updatedProgress);
+              if (updatedLongestStreak > habit.longestStreak) {
+                // Double the score if longest streak increments
+                score *= 2;
+              }
+
+              overallScore += score; // Add habit score to overall score
 
               return {
                 ...habit,
@@ -83,6 +92,7 @@ const useHabitsStore = createLocalStorageStore(
                 longestStreak: updatedLongestStreak,
                 currentStreak: updatedCurrentStreak,
                 lastUpdated: currentDate.toISOString(),
+                score: score,
               };
             }
           }
@@ -91,7 +101,6 @@ const useHabitsStore = createLocalStorageStore(
         return { habits: updatedHabits };
       }),
   }),
-
   "habits-store" // unique name
 );
 
