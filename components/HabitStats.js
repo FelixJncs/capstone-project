@@ -1,3 +1,4 @@
+import React from "react";
 import useHabitsStore from "@/store";
 import styled from "styled-components";
 import { StyledLink } from "./StyledLink";
@@ -22,12 +23,23 @@ const StyledOverallScore = styled.div`
   text-align: center;
   margin-bottom: 1rem;
 `;
+
 const HabitStats = () => {
   const habits = useHabitsStore((state) => state.habits);
   const overallScore = habits.reduce(
     (totalScore, habit) => totalScore + habit.score,
     0
   );
+
+  const updateHabit = useHabitsStore((state) => state.updateHabit);
+
+  const handleResetStreak = (habitId) => {
+    const updatedHabit = {
+      id: habitId,
+      currentStreak: 0,
+    };
+    updateHabit(updatedHabit);
+  };
 
   return (
     <>
@@ -42,10 +54,13 @@ const HabitStats = () => {
             <StyledHabitStatsCard key={habit.id}>
               <div>
                 <p>{habit.name}</p>
-                <p>Current Streak: {habit.streakCount}</p>
+                <p>Current Streak: {habit.currentStreak}</p>
                 <p>Longest Streak: {habit.longestStreak}</p>
               </div>
               <p>Score: {habit.score}</p>
+              <button onClick={() => handleResetStreak(habit.id)}>
+                Reset Streak
+              </button>
             </StyledHabitStatsCard>
           );
         })}

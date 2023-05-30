@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; //Middelware: intercept state updates and perform actions before or after the update occurs
 // Persist: the state of the store will be automatically persisted in localStorage whenever it changes
-import { calculateHabitScore } from "./components/HabitScore";
+
 const useHabitsStore = createLocalStorageStore(
   (set) => ({
     habits: [
@@ -35,70 +35,85 @@ const useHabitsStore = createLocalStorageStore(
         score: 0,
       },
     ],
-
     overallScore: 0,
     addHabit: (newHabit) =>
       set((state) => ({ habits: [...state.habits, newHabit] })),
     updateHabit: (updatedHabit) =>
       set((state) => ({
         habits: state.habits.map((habit) =>
-          habit.id === updatedHabit.id ? updatedHabit : habit
+          habit.id === updatedHabit.id
+            ? { ...habit, currentStreak: updatedHabit.currentStreak }
+            : habit
         ),
       })),
     deleteHabit: (habitId) =>
       set((state) => ({
         habits: state.habits.filter((habit) => habit.id !== habitId),
       })),
+    resetProgress: (habitId) =>
+      set((state) => {
+        const updatedHabits = state.habits.map((habit) => {
+          if (habit.id === habitId) {
+            return {
+              ...habit,
+              progress: 0,
+            };
+          }
+          return habit;
+        });
+        return { habits: updatedHabits };
+      }),
+
     incrementProgress: (habitId) =>
       set((state) => {
         const currentDate = new Date();
         let overallScore = 0;
         const updatedHabits = state.habits.map((habit) => {
           if (habit.id === habitId) {
-            // Check if the habit was updated today
-            const lastUpdatedDate = new Date(habit.lastUpdated);
-            const isSameDay =
-              currentDate.toDateString() === lastUpdatedDate.toDateString();
+            const updatedProgress = habit.progress + 1;
+            // // Check if the habit was updated today
+            // const lastUpdatedDate = new Date(habit.lastUpdated);
+            // const isSameDay =
+            //   currentDate.toDateString() === lastUpdatedDate.toDateString();
 
-            if (isSameDay) {
-              // The habit was already updated today, no need to increment progress again
-              return habit;
+            // if (isSameDay) {
+            //   // The habit was already updated today, no need to increment progress again
+            //   return habit;
+            // } else {
+
+            const updatedStreakCount =
+              updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
+            let updatedCurrentStreak = habit.currentStreak;
+
+            if (updatedProgress > 0) {
+              updatedCurrentStreak = habit.currentStreak + 1;
             } else {
-              const updatedProgress = habit.progress + 1;
-              const updatedStreakCount =
-                updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
-              let updatedCurrentStreak = habit.currentStreak;
-
-              if (updatedProgress > 0) {
-                // If progress is positive, update the current streak
-                updatedCurrentStreak = habit.currentStreak + 1;
-              } else {
-                // If progress is zero, reset the current streak
-                updatedCurrentStreak = 0;
-              }
-
-              const updatedLongestStreak = Math.max(
-                habit.longestStreak,
-                updatedCurrentStreak
-              );
-              let score = calculateHabitScore(updatedProgress);
-              if (updatedLongestStreak > habit.longestStreak) {
-                // Double the score if longest streak increments
-                score *= 2;
-              }
-
-              overallScore += score; // Add habit score to overall score
-
-              return {
-                ...habit,
-                progress: updatedProgress,
-                streakCount: updatedStreakCount,
-                longestStreak: updatedLongestStreak,
-                currentStreak: updatedCurrentStreak,
-                lastUpdated: currentDate.toISOString(),
-                score: score,
-              };
+              updatedCurrentStreak = 0;
             }
+
+            let updatedScore =
+              habit.score + 100 * (updatedProgress - habit.progress);
+
+            if (updatedCurrentStreak > habit.longestStreak) {
+              updatedScore += 100;
+            }
+
+            overallScore += updatedScore;
+
+            const updatedLongestStreak = Math.max(
+              habit.longestStreak,
+              updatedCurrentStreak
+            );
+
+            return {
+              ...habit,
+              progress: updatedProgress,
+              streakCount: updatedStreakCount,
+              longestStreak: updatedLongestStreak,
+              currentStreak: updatedCurrentStreak,
+              lastUpdated: currentDate.toISOString(),
+              score: updatedScore,
+            };
           }
           return habit;
         });
