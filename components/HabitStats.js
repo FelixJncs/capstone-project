@@ -14,9 +14,9 @@ const StyledHabitStatsList = styled.ul`
 `;
 
 const StyledHabitStatsCard = styled.li`
-  background-color: #f5f5f5;
+  background-color: beige;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 2rem;
 `;
 
 const StyledOverallScore = styled.div`
@@ -46,7 +46,7 @@ const HabitStats = () => {
       <StyledTitle>Unhabit</StyledTitle>
       <h2>Habit Stats</h2>
       <p>
-        Keep going! The Score for each Habit increases by 100 points with every
+        Keep going! The Score for each habit increases by 100 points with every
         day you manage to stay strong. Every time your longest Streak increases,
         you get additional 100 points.
       </p>

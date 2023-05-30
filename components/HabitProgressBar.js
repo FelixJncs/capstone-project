@@ -5,7 +5,7 @@ import useHabitsStore from "@/store";
 const StyledProgressBar = styled.div`
   width: 100%;
   height: 24px;
-  background-color: white;
+  background-color: #d6d3ab;
   border-radius: 12px;
   position: relative;
 `;
@@ -13,7 +13,11 @@ const StyledProgressBar = styled.div`
 const FilledProgressBar = styled.div`
   height: 100%;
   width: ${({ progress }) => `${(progress / 30) * 100}%`};
-  background-color: #d9c8b4;
+  background: linear-gradient(
+    94deg,
+    rgba(146, 225, 186, 0.6765676567656767) 15%,
+    rgba(146, 225, 186, 1) 57%
+  );
   border-radius: 12px;
   transition: width 0.3s ease-in-out;
 `;

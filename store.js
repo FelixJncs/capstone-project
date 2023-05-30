@@ -71,49 +71,49 @@ const useHabitsStore = createLocalStorageStore(
         const updatedHabits = state.habits.map((habit) => {
           if (habit.id === habitId) {
             const updatedProgress = habit.progress + 1;
-            // // Check if the habit was updated today
-            // const lastUpdatedDate = new Date(habit.lastUpdated);
-            // const isSameDay =
-            //   currentDate.toDateString() === lastUpdatedDate.toDateString();
+            // Check if the habit was updated today
+            const lastUpdatedDate = new Date(habit.lastUpdated);
+            const isSameDay =
+              currentDate.toDateString() === lastUpdatedDate.toDateString();
 
-            // if (isSameDay) {
-            //   // The habit was already updated today, no need to increment progress again
-            //   return habit;
-            // } else {
-
-            const updatedStreakCount =
-              updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
-            let updatedCurrentStreak = habit.currentStreak;
-
-            if (updatedProgress > 0) {
-              updatedCurrentStreak = habit.currentStreak + 1;
+            if (isSameDay) {
+              // The habit was already updated today, no need to increment progress again
+              return habit;
             } else {
-              updatedCurrentStreak = 0;
+              const updatedStreakCount =
+                updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
+              let updatedCurrentStreak = habit.currentStreak;
+
+              if (updatedProgress > 0) {
+                updatedCurrentStreak = habit.currentStreak + 1;
+              } else {
+                updatedCurrentStreak = 0;
+              }
+
+              let updatedScore =
+                habit.score + 100 * (updatedProgress - habit.progress);
+
+              if (updatedCurrentStreak > habit.longestStreak) {
+                updatedScore += 100;
+              }
+
+              overallScore += updatedScore;
+
+              const updatedLongestStreak = Math.max(
+                habit.longestStreak,
+                updatedCurrentStreak
+              );
+
+              return {
+                ...habit,
+                progress: updatedProgress,
+                streakCount: updatedStreakCount,
+                longestStreak: updatedLongestStreak,
+                currentStreak: updatedCurrentStreak,
+                lastUpdated: currentDate.toISOString(),
+                score: updatedScore,
+              };
             }
-
-            let updatedScore =
-              habit.score + 100 * (updatedProgress - habit.progress);
-
-            if (updatedCurrentStreak > habit.longestStreak) {
-              updatedScore += 100;
-            }
-
-            overallScore += updatedScore;
-
-            const updatedLongestStreak = Math.max(
-              habit.longestStreak,
-              updatedCurrentStreak
-            );
-
-            return {
-              ...habit,
-              progress: updatedProgress,
-              streakCount: updatedStreakCount,
-              longestStreak: updatedLongestStreak,
-              currentStreak: updatedCurrentStreak,
-              lastUpdated: currentDate.toISOString(),
-              score: updatedScore,
-            };
           }
           return habit;
         });
