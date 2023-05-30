@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; //Middelware: intercept state updates and perform actions before or after the update occurs
 // Persist: the state of the store will be automatically persisted in localStorage whenever it changes
+import { calculateHabitScore } from "./components/HabitScore";
 const useHabitsStore = createLocalStorageStore(
   (set) => ({
     habits: [
@@ -17,6 +18,7 @@ const useHabitsStore = createLocalStorageStore(
         longestStreak: 0,
         currentStreak: 0,
         lastUpdated: null,
+        score: 0,
       },
       {
         id: "2",
@@ -30,8 +32,10 @@ const useHabitsStore = createLocalStorageStore(
         longestStreak: 0,
         currentStreak: 0,
         lastUpdated: null,
+        score: 0,
       },
     ],
+
     overallScore: 0,
     addHabit: (newHabit) =>
       set((state) => ({ habits: [...state.habits, newHabit] })),
