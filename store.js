@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; //Middelware: intercept state updates and perform actions before or after the update occurs
 // Persist: the state of the store will be automatically persisted in localStorage whenever it changes
+
 const useHabitsStore = createLocalStorageStore(
   (set) => ({
     habits: [
@@ -17,6 +18,7 @@ const useHabitsStore = createLocalStorageStore(
         longestStreak: 0,
         currentStreak: 0,
         lastUpdated: null,
+        score: 0,
       },
       {
         id: "2",
@@ -30,25 +32,45 @@ const useHabitsStore = createLocalStorageStore(
         longestStreak: 0,
         currentStreak: 0,
         lastUpdated: null,
+        score: 0,
       },
     ],
+    overallScore: 0,
     addHabit: (newHabit) =>
       set((state) => ({ habits: [...state.habits, newHabit] })),
     updateHabit: (updatedHabit) =>
       set((state) => ({
         habits: state.habits.map((habit) =>
-          habit.id === updatedHabit.id ? updatedHabit : habit
+          habit.id === updatedHabit.id
+            ? { ...habit, currentStreak: updatedHabit.currentStreak }
+            : habit
         ),
       })),
     deleteHabit: (habitId) =>
       set((state) => ({
         habits: state.habits.filter((habit) => habit.id !== habitId),
       })),
+    resetProgress: (habitId) =>
+      set((state) => {
+        const updatedHabits = state.habits.map((habit) => {
+          if (habit.id === habitId) {
+            return {
+              ...habit,
+              progress: 0,
+            };
+          }
+          return habit;
+        });
+        return { habits: updatedHabits };
+      }),
+
     incrementProgress: (habitId) =>
       set((state) => {
         const currentDate = new Date();
+        let overallScore = 0;
         const updatedHabits = state.habits.map((habit) => {
           if (habit.id === habitId) {
+            const updatedProgress = habit.progress + 1;
             // Check if the habit was updated today
             const lastUpdatedDate = new Date(habit.lastUpdated);
             const isSameDay =
@@ -58,18 +80,24 @@ const useHabitsStore = createLocalStorageStore(
               // The habit was already updated today, no need to increment progress again
               return habit;
             } else {
-              const updatedProgress = habit.progress + 1;
               const updatedStreakCount =
                 updatedProgress > 0 ? habit.streakCount + 1 : habit.streakCount;
               let updatedCurrentStreak = habit.currentStreak;
 
               if (updatedProgress > 0) {
-                // If progress is positive, update the current streak
                 updatedCurrentStreak = habit.currentStreak + 1;
               } else {
-                // If progress is zero, reset the current streak
                 updatedCurrentStreak = 0;
               }
+
+              let updatedScore =
+                habit.score + 100 * (updatedProgress - habit.progress);
+
+              if (updatedCurrentStreak > habit.longestStreak) {
+                updatedScore += 100;
+              }
+
+              overallScore += updatedScore;
 
               const updatedLongestStreak = Math.max(
                 habit.longestStreak,
@@ -83,6 +111,7 @@ const useHabitsStore = createLocalStorageStore(
                 longestStreak: updatedLongestStreak,
                 currentStreak: updatedCurrentStreak,
                 lastUpdated: currentDate.toISOString(),
+                score: updatedScore,
               };
             }
           }
@@ -91,7 +120,6 @@ const useHabitsStore = createLocalStorageStore(
         return { habits: updatedHabits };
       }),
   }),
-
   "habits-store" // unique name
 );
 

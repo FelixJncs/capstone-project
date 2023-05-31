@@ -1,3 +1,4 @@
+import React from "react";
 import useHabitsStore from "@/store";
 import styled from "styled-components";
 import { StyledLink } from "./StyledLink";
@@ -13,27 +14,58 @@ const StyledHabitStatsList = styled.ul`
 `;
 
 const StyledHabitStatsCard = styled.li`
-  background-color: #f5f5f5;
+  background-color: beige;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 2rem;
+`;
+
+const StyledOverallScore = styled.div`
+  text-align: center;
+  margin-bottom: 1rem;
 `;
 
 const HabitStats = () => {
   const habits = useHabitsStore((state) => state.habits);
+  const overallScore = habits.reduce(
+    (totalScore, habit) => totalScore + habit.score,
+    0
+  );
+
+  const updateHabit = useHabitsStore((state) => state.updateHabit);
+
+  const handleResetStreak = (habitId) => {
+    const updatedHabit = {
+      id: habitId,
+      currentStreak: 0,
+    };
+    updateHabit(updatedHabit);
+  };
 
   return (
     <>
       <StyledTitle>Unhabit</StyledTitle>
       <h2>Habit Stats</h2>
+      <p>
+        Keep going! The Score for each habit increases by 100 points with every
+        day you manage to stay strong. Every time your longest Streak increases,
+        you get additional 100 points.
+      </p>
+      <StyledOverallScore>
+        <p>Overall Score: {overallScore}</p>
+      </StyledOverallScore>
       <StyledHabitStatsList>
         {habits.map((habit) => {
           return (
             <StyledHabitStatsCard key={habit.id}>
-              <p>{habit.name}</p>
-              <p>Current Streak: {habit.streakCount}</p>{" "}
-              {/* Display current streak */}
-              <p>Longest Streak: {habit.longestStreak}</p>{" "}
-              {/* Display longest streak */}
+              <div>
+                <p>{habit.name}</p>
+                <p>Current Streak: {habit.currentStreak}</p>
+                <p>Longest Streak: {habit.longestStreak}</p>
+              </div>
+              <p>Score: {habit.score}</p>
+              <button onClick={() => handleResetStreak(habit.id)}>
+                Reset Streak
+              </button>
             </StyledHabitStatsCard>
           );
         })}

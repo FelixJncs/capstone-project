@@ -55,6 +55,7 @@ function AddHabitForm() {
     longestStreak: 0,
     currentStreak: 0,
     lastUpdated: null,
+    score: 0,
   });
   const router = useRouter();
 
