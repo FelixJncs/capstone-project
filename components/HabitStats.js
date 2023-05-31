@@ -57,7 +57,6 @@ const HabitStats = () => {
           );
         })}
       </StyledHabitStatsList>
-      <StyledLink href="/">back</StyledLink>
     </>
   );
 };

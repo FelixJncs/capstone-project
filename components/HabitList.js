@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import HabitCard from "./HabitCard";
-import useStore from "../store";
-
+import useHabitsStore from "@/store";
 const StyledHabitList = styled.ul`
   list-style-type: none;
   display: flex;
@@ -12,7 +11,7 @@ const StyledHabitList = styled.ul`
 `;
 
 export default function HabitList() {
-  const habits = useStore((state) => state.habits);
+  const habits = useHabitsStore((state) => state.habits);
   return (
     <StyledHabitList>
       {habits.map((habit) => (
