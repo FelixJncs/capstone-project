@@ -12,5 +12,4 @@ export const StyledLink = styled(Link)`
   color: black;
   font-weight: bold;
   margin: 1rem 0 2rem 2rem;
-  cursor: pointer;
 `;

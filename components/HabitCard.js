@@ -44,6 +44,7 @@ const StyledOnCardLink = styled(Link)`
   font-weight: bold;
   display: flex;
   align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 const StyledIcon = styled.span`

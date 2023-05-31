@@ -14,5 +14,7 @@ export const StyledButton = styled.button`
   display: flex;
   align-items: center;
   margin-right: 1rem;
+  margin-left: 0.5rem;
   margin-bottom: 0.5rem;
+  border: 1px solid #d6d3ab;
 `;
