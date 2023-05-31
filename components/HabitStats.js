@@ -31,16 +31,6 @@ const HabitStats = () => {
     0
   );
 
-  const updateHabit = useHabitsStore((state) => state.updateHabit);
-
-  const handleResetStreak = (habitId) => {
-    const updatedHabit = {
-      id: habitId,
-      currentStreak: 0,
-    };
-    updateHabit(updatedHabit);
-  };
-
   return (
     <>
       <StyledTitle>Unhabit</StyledTitle>
@@ -63,9 +53,6 @@ const HabitStats = () => {
                 <p>Longest Streak: {habit.longestStreak}</p>
               </div>
               <p>Score: {habit.score}</p>
-              <button onClick={() => handleResetStreak(habit.id)}>
-                Reset Streak
-              </button>
             </StyledHabitStatsCard>
           );
         })}
