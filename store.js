@@ -9,10 +9,12 @@ const useHabitsStore = createLocalStorageStore(
       {
         id: "1",
         name: "Procrastination",
-        reason: "To avoid or delay completing tasks or responsibilities",
-        feeling: "Stressed or overwhelmed",
+        reason:
+          "To avoid or delay completing tasks or responsibilities. Procrastination can stem from feelings of perfectionism, fear of failure, or lack of motivation.",
+        feeling:
+          "Feeling stressed or overwhelmed due to the mounting tasks and deadlines that have been put off.",
         overcome:
-          "Break tasks into smaller pieces, set deadlines, and use a planner or task list to stay on track.",
+          "To overcome procrastination, break tasks into smaller pieces, set deadlines, prioritize tasks, and use a planner or task list to stay organized and focused. Additionally, addressing any underlying fears or perfectionism tendencies can help in combating procrastination.",
         progress: 0,
         streakCount: 0,
         longestStreak: 0,
@@ -23,10 +25,12 @@ const useHabitsStore = createLocalStorageStore(
       {
         id: "2",
         name: "Nail-biting",
-        reason: "A nervous or anxious habit",
-        feeling: "Embarrassed or ashamed",
+        reason:
+          "Nail-biting is a nervous or anxious habit that often occurs as a way to cope with stress, anxiety, or boredom.",
+        feeling:
+          "Feeling embarrassed or ashamed of the nail-biting habit, especially in social situations or when nails appear unsightly.",
         overcome:
-          "Use stress-reducing techniques such as exercise, meditation, or deep breathing. Wear gloves or paint your nails to reduce temptation.",
+          "To overcome nail-biting, it can be helpful to identify triggers and find alternative stress-reducing techniques such as exercise, meditation, or deep breathing. Keeping nails trimmed and polished, wearing gloves, or using bitter-tasting nail polish can also reduce temptation and break the habit.",
         progress: 0,
         streakCount: 0,
         longestStreak: 0,
