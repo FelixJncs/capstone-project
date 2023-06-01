@@ -8,7 +8,7 @@ const StyledProgressBar = styled.div`
   background-color: #d6d3ab;
   border-radius: 12px;
   position: relative;
-  box-shadow: 0.1rem -0.2rem 0.7rem white;
+  box-shadow: 0.1rem 0.2rem 0.7rem #6f4e37;
 `;
 
 const FilledProgressBar = styled.div`

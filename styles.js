@@ -1,6 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+:root {
+  //--backgorund:
+  --Icons:#d6d3ab;
+ // --cards:
+}
+
+
+
   *,
   *::before,
   *::after {

@@ -61,13 +61,13 @@ const StyledIcon = styled.span`
   justify-content: center;
   margin-right: 0.25rem;
   svg {
-    fill: #0a41f0;
+    fill: var(--Icons);
     font-size: 15px;
   }
 `;
 
 const StyledDetailsIcon = styled(FaChevronDown)`
-  fill: #0a41f0;
+  fill: var(--Icons);
   font-size: 15px;
   margin-left: 0.5rem;
 `;

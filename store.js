@@ -38,6 +38,38 @@ const useHabitsStore = createLocalStorageStore(
         lastUpdated: null,
         score: 0,
       },
+      {
+        id: "3",
+        name: "Excessive Social Media Usage",
+        reason:
+          "Excessive social media usage can be driven by the desire for constant validation, fear of missing out (FOMO), or as a way to escape from reality.",
+        feeling:
+          "Feeling disconnected from real-life experiences, comparing oneself to others, or experiencing a decrease in productivity due to excessive time spent on social media.",
+        overcome:
+          "To reduce excessive social media usage, set boundaries by limiting screen time, engaging in offline activities, practicing digital detox, and being mindful of the impact of social media on mental well-being.",
+        progress: 0,
+        streakCount: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+        lastUpdated: null,
+        score: 0,
+      },
+      {
+        id: "4",
+        name: "Negative Self-Talk",
+        reason:
+          "Negative self-talk refers to the habit of engaging in self-critical or self-defeating thoughts and beliefs. It can stem from low self-esteem, past experiences, or internalized criticism from others.",
+        feeling:
+          "Feeling down, demotivated, or self-conscious due to the negative thoughts and beliefs about oneself.",
+        overcome:
+          "To overcome negative self-talk, it is important to practice self-awareness and challenge negative thoughts with positive affirmations and realistic perspectives. Seeking support from a therapist or counselor can also be beneficial in addressing underlying issues and developing healthier self-talk patterns.",
+        progress: 0,
+        streakCount: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+        lastUpdated: null,
+        score: 0,
+      },
     ],
     overallScore: 0,
     addHabit: (newHabit) =>
