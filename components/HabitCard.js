@@ -7,10 +7,10 @@ import HabitProgressBar from "./HabitProgressBar";
 
 const StyledHabitCard = styled.li`
   background-color: beige;
-  border-radius: 1rem 20%;
+  border-radius: 2rem;
   border: 1px solid grey;
   padding: 1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  box-shadow: 0 0.125rem 0.25rem #6f4e37;
   h3 {
     margin: 0;
   }
@@ -37,7 +37,7 @@ const StyledOnCardLink = styled(Link)`
   padding: 0.5rem 1rem;
   background-color: beige;
   border-radius: 0.5rem;
-  box-shadow: 0.1rem -0.2rem 0.7rem white;
+  box-shadow: 0.1rem 0.2rem 0.7rem #6f4e37;
   border: 1px solid #d6d3ab;
   text-decoration: none;
   color: black;
@@ -47,19 +47,27 @@ const StyledOnCardLink = styled(Link)`
   margin-bottom: 0.5rem;
 `;
 
+const StyledContent = styled.p`
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0.1rem 0.2rem 0.7rem #6f4e37;
+  border: 1px solid #d6d3ab;
+`;
+
 const StyledIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 0.25rem;
   svg {
-    fill: #0a41f0;
+    fill: var(--Icons);
     font-size: 15px;
   }
 `;
 
 const StyledDetailsIcon = styled(FaChevronDown)`
-  fill: #0a41f0;
+  fill: var(--Icons);
   font-size: 15px;
   margin-left: 0.5rem;
 `;
@@ -81,8 +89,10 @@ export default function HabitCard({ habit }) {
             <StyledDetailsIcon />
           </StyledOnCardLink>
         </h2>
-        <p>Reason: {habit.reason}</p>
-        <p>Feeling: {habit.feeling}</p>
+        <StyledContent>
+          <strong>Reason:</strong> {habit.reason}
+        </StyledContent>
+
         <HabitProgressBar habit={habit} updateHabit={updateHabit} />
       </HabitCardContent>
       <HabitCardFooter>

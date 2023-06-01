@@ -8,7 +8,7 @@ const NavbarWrapper = styled.nav`
   left: 0;
   width: 100%;
   height: 2rem;
-  background-color: #d6d3ab;
+  background-color: beige;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +17,7 @@ const NavbarWrapper = styled.nav`
   border-top: 2px solid #d6d3ab;
   border-left: 2px solid #d6d3ab; /* Brown border on top */
   border-right: 2px solid #d6d3ab;
-  box-shadow: 0 2rem 2rem 2rem white;
+  box-shadow: 0 2rem 2rem 2rem #d6d3ab;
   /* Add any additional styles you want for your navbar */
 `;
 
@@ -32,7 +32,7 @@ const StyledNavbarLink = styled(Link)`
   font-weight: bold;
   svg {
     font-size: 30px;
-    fill: #0a41f0;
+    fill: var(--Icons);
   }
 `;
 
