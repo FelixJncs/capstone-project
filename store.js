@@ -41,9 +41,7 @@ const useHabitsStore = createLocalStorageStore(
     updateHabit: (updatedHabit) =>
       set((state) => ({
         habits: state.habits.map((habit) =>
-          habit.id === updatedHabit.id
-            ? { ...habit, currentStreak: updatedHabit.currentStreak }
-            : habit
+          habit.id === updatedHabit.id ? { ...habit, ...updatedHabit } : habit
         ),
       })),
     deleteHabit: (habitId) =>

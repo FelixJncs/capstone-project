@@ -4,7 +4,6 @@ import useStore from "../store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { StyledTitle } from "./StyledTitle";
-import { StyledLink } from "./StyledLink";
 import { StyledButton } from "./StyledButton";
 
 const StyledFormContainer = styled.form`
@@ -118,8 +117,6 @@ function AddHabitForm() {
         </StyledFormRow>
         <StyledButton type="submit">Add Habit</StyledButton>
       </StyledFormContainer>
-
-      <StyledLink href="/">Back</StyledLink>
     </>
   );
 }
